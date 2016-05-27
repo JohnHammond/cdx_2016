@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'forums/style.css'%}" />
+<script type="text/javascript" src="{% static "jquery/dist/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "bootstrap/dist/js/bootstrap.js" %}"></script>
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.css" %}" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'forums/schedule.css'%}" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Joint Cyber Command{% endblock %}</title>
+</head>
+<body>
+ 	<div id="page">
+		<div id="header">
+			<div id="section">
+                <div>
+                {% if user.is_authenticated %}
+                    <p><a href={% url 'profile' %}>{{user|capfirst}}</p>
+                    <p><a href={% url 'auth:logout' %}>Log Out</p>
+                {% else %}
+                    <p><a href={% url 'auth:login' %}>login</p>
+                    <p><a href={% url 'user:signup' %}>register</p>
+                {% endif %}
+                </div>
+                <div><a href={% url 'index' %}><img src={% static 'images/logo2.gif' %} alt="Logo" /></a></div>
+			</div>
+			<ul>
+                <li {% block li1 %}{% endblock %}><a href={% url 'index' %}>Home</a></li>
+                <li {% block li2 %}{% endblock %}><a href={% url 'forums:overview' %}>Forum</a></li>
+				<li {% block li3 %}{% endblock %}><a href={% url "schedule:month_calendar" 'base' %}>Calendar</a></li>
+                {% comment %}
+                {% endcomment %}
+				<li {% block li4 %}{% endblock %}><a href={% url 'blog:overview' %}>Blog</a></li>
+				<li {% block li5 %}{% endblock %}><a href={% url 'connect' %}>Connect</a></li>
+				<li {% block li6 %}{% endblock %}><a href={% url 'contact' %}>Contact us</a></li>
+			</ul>
+            {% block tagline %} {% endblock %}
+
+   		</div>
+		<div id="content">
+            {% block submenu %}
+            {% endblock %}
+            {% block breadcrumb %}
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>
+		<div id="footer">
+            <div>
+                <div class='section'>
+                    <ul>
+                        <li><a href={% url 'index' %}>Home</a></li>
+                        <li><a href={% url 'forums:overview' %}>Forum</a></li>
+                        <li><a href={% url "schedule:month_calendar" 'base' %}>Calendar</a></li>
+                        <li><a href={% url 'blog:overview' %}>Blog</a></li>
+                        <li><a href={% url 'connect' %}>Connect</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <p>&copy; Copyright 2016. CDX.</p>
+            </div>
+		</div>
+</body>
+</html>

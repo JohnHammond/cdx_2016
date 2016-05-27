@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Available Calendars" %}{% endblock %}
+{% block li3 %}
+class="Current"
+{% endblock %}
+{% block body %}
+<div class='content'>
+<h1>{% trans "Available Calendars" %}</h1>
+<ul>
+{% for cal in object_list %}
+<li><b>{{ cal }}</b> :
+  <a href="{% url "schedule:compact_calendar" cal.slug %}">{% trans "Small Month" %}</a> --
+  <a href="{% url "schedule:month_calendar" cal.slug %}">{% trans "1 Month" %}</a> --
+  <a href="{% url "schedule:tri_month_calendar" cal.slug %}">{% trans "3 Months" %}</a> --
+  <a href="{% url "schedule:year_calendar" cal.slug %}">{% trans "This Year" %}</a> --
+  <a href="{% url "schedule:week_calendar" cal.slug %}">{% trans "Weekly" %}</a> --
+  <a href="{% url "schedule:day_calendar" cal.slug %}">{% trans "Daily" %}</a> --
+  <a href="{% url "schedule:upcoming_events_feed" cal.id %}">{% trans "Feed" %}</a></li><br/>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}

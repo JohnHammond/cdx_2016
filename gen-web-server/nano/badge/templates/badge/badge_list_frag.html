@@ -1,0 +1,8 @@
+{% load badge_tags %}
+{% block content %}
+<ul>
+    {% for object in object_list %}
+    <li>{% show_badge object %}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

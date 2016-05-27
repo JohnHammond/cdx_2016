@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div>
+    <p>
+        {% if searched_user %}
+            <h1>
+                {{searched_user.username|capfirst}}'s Profile
+            </h1>
+            <p><b>First Name:</b> {{searched_user.first_name}}</p>
+            <p><b>Last Name:</b> {{searched_user.last_name}}</p>
+            <p><b>E-mail Address:</b> {{searched_user.email}}</p>
+        {% else %}
+            <h1>
+                {{user.username|capfirst}}'s Profile
+            </h1>
+            <p><b>First Name:</b> {{user.first_name}}</p>
+            <p><b>Last Name:</b> {{user.last_name}}</p>
+            <p><b>E-mail Address:</b> {{user.email}}</p>
+        {% endif %}
+    </p>
+</div>
+{% endblock %}

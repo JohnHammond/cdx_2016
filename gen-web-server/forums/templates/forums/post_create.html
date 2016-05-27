@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+{% trans "Forums" %} - {{block.super}}
+{% endblock %}
+
+{% block li2 %}
+class="Current"
+{% endblock %}
+
+{% block breadcrumb %}
+<div>
+<ol class="breadcrumb">
+  <li><a href="{% url 'forums:overview' %}">{% trans "Forums" %}</a></li>
+  <li><a href="{% url 'forums:overview' %}#{{topic.forum.category.id}}">{{topic.forum.category.name}}</a></li>
+  <li><a href="{% url 'forums:forum' topic.forum.id %}">{{topic.forum.name}}</a></li>
+  <li><a href="{% url 'forums:topic' topic.id %}">{{topic.name}}</a></li>
+  <li class="active">{% trans "Create post" %}</li>
+</ol>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="current">
+  <h1>{% trans "Forums" %}</h1>
+<div class="row">
+  <div class="col-md-3">
+      {% comment %}
+    <div class="thumbnail pull-left" style="margin-right: 15px;">
+      <img src="http://placehold.it/64x64" alt="avatar">
+    </div>
+      {% endcomment %}
+    <div>
+      <p>{{user.username}}</p>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <form method="post" action="{% url 'forums:post_create' topic.id %}">
+      {% csrf_token %}
+      {% include "forms.html" %}
+      <p><input type="submit" class="btn btn-primary" value="{% trans "Create post" %}"></p>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}
+

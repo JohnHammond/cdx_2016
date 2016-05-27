@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+{% trans "Forums" %} - {{block.super}}
+{% endblock %}
+
+{% block li2 %}
+class="Current"
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+<div>
+<h1>{% trans "Forums" %}</h1>
+<table class="ForumTable">
+  {% for category in category_list %}
+  <thead>
+    <tr>
+      <th colspan="2"><a href="#{{category.id}}">{{category.name}}</a></th>
+
+    {% comment %}
+      <td>{% trans "Description" %}</td>
+    {% endcomment %}
+  </thead>
+  <tbody>
+  {% for forum in category.forums.all %}
+  <tr>
+    {% comment %}
+    <td style="width: 14px;">--<i class="icon-circle-arrow-right" style="margin-top: 1px;"></i></td>
+    {% endcomment %}
+    <td style="width: 20%;">
+      <a href="{% url 'forums:forum' forum.id %}">{{forum.name}}</a>
+    </td>
+    {% comment %}
+    <td>-&nbsp </td>
+    {% endcomment %}
+<td>
+        {{ forum.description }}
+    </td>
+    {% comment %}
+    {% if forum.get_latest_poster %}
+    <td>{{forum.get_latest_poster}}</td>
+    <td>{{forum.count_topics}}</td>
+    <td>{{forum.count_posts}}</td>
+    {% endif %}
+    {% endcomment %}
+  </tr>
+  {% endfor %}
+  </tbody>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

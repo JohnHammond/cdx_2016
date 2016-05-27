@@ -1,0 +1,25 @@
+{% block title %}{{ user }} – Private messages: {{ action }}{% endblock title %}
+{% block content %}
+    <h1>Messages ({{ action }})</h2>
+    <form method="POST" action=".">
+    {% csrf_token %}
+    <dl>
+    {% for message in pms %}
+    <dt><input type="checkbox" name="msgid" value="{{ message.id }}"/><b>{{ message.subject }}</b> 
+    </dt>
+    <dd>{{ message.text }}</dd>
+    {% endfor %}
+    </dl>
+    {% ifequal action 'archive' %}
+    <button name="submit" value="delete">Delete</button>
+    {% else %}
+    {% ifequal action 'sent' %}
+    <button name="submit" value="delete">Delete</button>
+    {% else %} 
+    <button name="submit" value="delete">Delete</button>
+    <button name="submit" value="archive">Archive</button>
+    {% endifequal %}
+    {% endifequal %}
+    </form> 
+{% endblock content %}
+

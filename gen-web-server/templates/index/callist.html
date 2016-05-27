@@ -1,0 +1,9 @@
+
+{% load staticfiles %}
+
+<h1>UPCOMING EVENTS:</h1>
+{% for event in events %}
+    <h2>{{ event.start|date:'D G:i' }} - {{ event.end|date:'D G:i' }}</h2>
+    <b>{{ event.title }}</b> 
+    <p>{{ event.description|safe }}</p>
+{% endfor %}

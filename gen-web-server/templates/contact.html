@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block li6 %}
+class='Current'
+{% endblock %}
+{% block body %}
+<div>
+    <h1>
+        Contact Us
+    </h1>
+    <p>
+        Please enter your questions or conerns and an administrator will get back to you within 24 hrs.
+    </p>
+    <form action={% url 'contact' %} method='post'>
+        <table>
+        {{ form }}
+        </table>
+    <input type='submit' value='Submit'/>
+    </form>
+</div>
+{% endblock %}

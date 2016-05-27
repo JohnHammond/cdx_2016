@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+{% trans "Forums" %} - {{block.super}}
+{% endblock %}
+
+{% block li2 %}
+class="Current"
+{% endblock %}
+
+{% block breadcrumb %}
+<div>
+<ol class="breadcrumb">
+  <li><a href="{% url 'forums:overview' %}">{% trans "Forums" %}</a></li>
+  <li><a href="{% url 'forums:overview' %}#{{topic.forum.category.id}}">{{topic.forum.category.name}}</a></li>
+  <li><a href="{% url 'forums:forum' topic.forum.id %}">{{topic.forum.name}}</a></li>
+  <li class="active">{{topic.name}}</li>
+</ol>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <h1>{% trans "Forums" %}</h1>
+  <h2> {{ topic.forum.description }}
+{% for post in topic.posts.all %}
+<div class="row">
+  <div class="span3">
+    {% comment %}
+    <div class="thumbnail pull-left" style="margin-right: 15px;">
+      <img src="http://placehold.it/64x64" alt="avatar">
+    </div>
+    {% endcomment %}
+    <div>
+        <p><b>USER:</b> {{post.user.username}}</p>
+    </div>
+  </div>
+  <div class="span7">
+    <div>
+      {{post.body|linebreaks}}
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+  <div class="span2">
+    <p class="pull-right"><small><a href="#{{forloop.counter}}" name="{{forloop.counter}}">#{{forloop.counter}}</a></small></p>
+    <p class="pull-right"><small>{{post.created}}</small></p>
+  </div>
+</div>
+<hr>
+{% endfor %}
+<div class="row">
+  <div class="span12">
+    {% if not topic.forum.is_closed and user.is_authenticated %}
+        <p><a href="{% url 'forums:post_create' topic.id %}" class="btn btn-primary">{% trans "Create post" %}</a></p>
+    {% else %}
+    <p>{% trans "This forum is closed, or you need to be signed in to make posts." %}
+    {% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}

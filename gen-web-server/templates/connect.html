@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block li5 %}
+class='Current'
+{% endblock %}
+{% block body %}
+<div>
+    <h1>
+        Connect with the base!
+    </h1>
+    <p>
+        Enter your email to stay connected with the base and all upcoming activities.
+    </p>
+    <form action={% url 'connect' %} method='post'>
+        {{ email_form }}
+    <input type='submit' value='Submit'/>
+    </form>
+    {% if email %}
+        <p>
+        Response: 
+        </P>
+        <p class='boxed'>
+            {% for line in data %}
+            {{ line }}<br>
+            {% endfor %}
+        </p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <h1>
+            Search for other users: 
+        </h1>
+    <form action={% url 'connect' %} method='post'>
+        {{ search_form }}
+    <input type='submit' value='Submit'/>
+    </form>
+    {% for User in regUsers %}
+    <p>{{User.username|capfirst}} ({{User.first_name}}, {{User.last_name}}) - {{User.last_login}}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

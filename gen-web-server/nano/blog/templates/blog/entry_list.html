@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block li4 %}
+class="Current"
+{% endblock %}
+{% block submenu %}
+{% comment %}
+<div>
+<ul>
+    <li><b>All</b></li>
+    <li><a href="./latest/">Latest news</a></li>
+</ul>
+</div>
+{% endcomment %}
+{% endblock submenu %}
+{% block content %}
+<div class='content'>
+{% if object_list %}
+<dl>
+{% for entry in object_list %}
+{% include 'blog/entry_with_fulldatetime.html' %}
+{% endfor %}
+</dl>
+{% else %}
+<p>No news for this date.</p>
+{% endif %}
+</div class='content'>
+{% endblock content %}

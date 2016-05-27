@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load scheduletags i18n %}
+
+{% block li3 %}
+class="Current"
+{% endblock %}
+
+{% block body %}
+<div class="content">
+{% include "schedule/_dialogs.html" %}
+<div class="row row-centered">
+  <div class="calendarname">{{ calendar.name }}</div>
+  {% prevnext "month_calendar" calendar periods.month "F Y"%}
+  <div class="now row-centered">
+    <a href="{% url "schedule:month_calendar" calendar.slug %}">
+      {% trans "This month" %}
+    </a>
+  </div>
+  <div class="center span7">
+    {% month_table calendar periods.month "regular" %}
+  </div>
+</div>
+{% comment %}
+<div class="row row-centered">
+  <a href="{% url "schedule:tri_month_calendar" calendar.slug %}{% querystring_for_date periods.month.start 2 True %}">
+    {% trans "Three Month Calendar" %}
+  </a>
+  <a href="{% url "schedule:year_calendar" calendar.slug %}{% querystring_for_date periods.month.start 1 True %}">
+    {% trans "Full Year Calendar" %}
+  </a>
+</div>
+{% endcomment %}
+</div>
+{% endblock %}

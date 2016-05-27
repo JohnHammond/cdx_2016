@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block li1 %}
+class="Current"
+{% endblock %}
+
+{% block tagline %}
+<div id="tagline">
+    <div>
+        <h4>Joint Cyber Command Community Page</h4>
+        <p>Connecting the community with their local service members!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div id="home">
+        <div>
+            <div id="aside">
+                <div>
+                        {% include 'index/bloglist.html' %}
+                </div>
+                <div> 
+                    {% include 'index/callist.html' %}
+                </div> 
+            </div>
+                    {% include 'index/forumlist.html' %}
+        </div>
+    </div>
+{% endblock %}

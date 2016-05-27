@@ -1,0 +1,6 @@
+  <h1>Forums</h1>
+  {% for post in posts %}
+  <h2>{{ post.user }}@{{ post.updated|date:'G:m' }}</h2>
+    <p><b>Topic: </b>{{ post.topic }}</p>
+      <p>{{ post.body|safe }}</p>
+  {% endfor %}
